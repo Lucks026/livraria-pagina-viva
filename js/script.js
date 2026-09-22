@@ -1,6 +1,6 @@
 /* =========================================================================
    Livraria Página Viva - script do carrinho
-   Aluno: Lucas Lemos Barbosa | Professor: Everton
+   Aluno: Lucas Lemos | Professor: Everton
 
    PAPEL DO JAVASCRIPT NESTE FLUXO (Etapa 5)
    Dos três arquivos, o JavaScript é o que roda dentro do navegador de quem
