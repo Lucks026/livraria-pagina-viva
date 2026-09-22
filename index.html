@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <!-- Etapa 4.1: orienta o navegador sobre largura e escala em dispositivos moveis. -->
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="author" content="Lucas Lemos Barbosa">
+    <meta name="description" content="Pagina de cadastro do livro O Jardim das Palavras Perdidas no catalogo da Livraria Pagina Viva.">
+    <title>Livraria Página Viva — O Jardim das Palavras Perdidas</title>
+    <!-- Etapa 2/7: CSS externo, caminho relativo a partir da pasta do projeto. -->
+    <link rel="stylesheet" href="css/estilo.css">
+</head>
+
+<body>
+
+    <header id="cabecalho" class="barra">
+        <h1 class="marca">Livraria Página Viva</h1>
+
+        <nav id="menu" aria-label="Menu principal">
+            <ul class="menu-lista">
+                <li><a href="#inicio">Início</a></li>
+                <li><a href="#catalogo">Catálogo</a></li>
+                <!-- Etapa 1: link interno que salta para a section#contato sem recarregar a pagina. -->
+                <li><a href="#contato">Contato</a></li>
+            </ul>
+        </nav>
+
+        <p class="resumo-carrinho">
+            Carrinho: <span id="contador">0</span>
+        </p>
+    </header>
+
+    <main id="inicio">
+
+        <section id="catalogo" class="bloco">
+            <h2>Catálogo: destaque da semana</h2>
+
+            <article id="livro" class="card card-livro">
+                <img class="capa" src="imagens/capa-livro.png"
+                     alt="Capa do livro O Jardim das Palavras Perdidas, de Helena Vasconcelos: uma janela de terminal escura com o título em letras monoespaçadas e a ficha do livro listada como saída de comando.">
+
+                <section class="card-dados">
+                    <h3 class="titulo-livro">O Jardim das Palavras Perdidas</h3>
+                    <p class="autor">Helena Vasconcelos</p>
+                    <p class="preco">R$ 59,90</p>
+
+                    <p>
+                        Ao herdar a casa da avó em uma cidade do interior, a tradutora Marina encontra
+                        no sótão um caderno com centenas de palavras que ninguém mais usa. Cada verbete
+                        vem acompanhado de uma data, de um nome e de uma história curta que alguém
+                        preferiu não contar em voz alta.
+                    </p>
+                    <p>
+                        Guiada por esse inventário, ela começa a reconstruir três gerações de silêncios
+                        familiares. O romance alterna entre o presente de Marina e os bilhetes deixados
+                        no caderno, montando aos poucos um retrato de como uma família escolhe o que
+                        lembrar e o que deixar cair no esquecimento.
+                    </p>
+                    <p>
+                        Com prosa contida e capítulos curtos, <em>O Jardim das Palavras Perdidas</em>
+                        é uma leitura sobre memória, herança e o peso das coisas que deixamos de dizer.
+                    </p>
+
+                    <button id="btn-adicionar" class="btn" type="button">Adicionar ao carrinho</button>
+
+                    <!-- Etapa 5.1: lista do carrinho comeca vazia e e preenchida pelo JavaScript. -->
+                    <ul id="carrinho" class="lista-carrinho"></ul>
+                </section>
+            </article>
+        </section>
+
+        <section id="destaques" class="bloco">
+            <h2>Destaques deste livro</h2>
+            <!--
+                Etapa 1: <ul> porque a ordem dos itens nao altera o sentido do conteudo.
+                "Frete gratis" antes ou depois de "Capa dura" comunica exatamente a mesma coisa.
+            -->
+            <ul class="lista-destaques">
+                <li class="destaque">Capa dura com costura aparente</li>
+                <li class="destaque">Frete grátis acima de R$ 50</li>
+                <li class="destaque">Entrega em 24h nas capitais</li>
+                <li class="destaque">Marcador de páginas exclusivo</li>
+            </ul>
+        </section>
+
+        <section id="formatos" class="bloco">
+            <h2>Formatos disponíveis</h2>
+
+            <!--
+                Etapa 1: <table> porque existe relacao tabular real entre as linhas (formato)
+                e as colunas (preco e prazo). Cada celula so faz sentido no cruzamento das duas.
+            -->
+            <table class="tabela-formatos">
+                <caption>Comparativo de preço e prazo de entrega por formato</caption>
+                <thead>
+                    <tr>
+                        <th scope="col">Formato</th>
+                        <th scope="col">Preço</th>
+                        <th scope="col">Prazo de entrega</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <th scope="row">Físico</th>
+                        <td>R$ 59,90</td>
+                        <td>2 a 4 dias úteis</td>
+                    </tr>
+                    <tr>
+                        <th scope="row">E-book</th>
+                        <td>R$ 29,90</td>
+                        <td>Imediato, por download</td>
+                    </tr>
+                    <tr>
+                        <th scope="row">Audiobook</th>
+                        <td>R$ 39,90</td>
+                        <td>Imediato, por streaming</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <!-- Etapa 3.3: estes cartoes sao dispostos em grade (CSS Grid) no estilo.css. -->
+            <ul class="grade-formatos">
+                <li class="card card-formato">
+                    <h3>Físico</h3>
+                    <p class="preco">R$ 59,90</p>
+                    <p>Capa dura, 352 páginas. Chega em 2 a 4 dias úteis.</p>
+                </li>
+                <li class="card card-formato">
+                    <h3>E-book</h3>
+                    <p class="preco">R$ 29,90</p>
+                    <p>Arquivo ePub e PDF. Disponível logo após a compra.</p>
+                </li>
+                <li class="card card-formato">
+                    <h3>Audiobook</h3>
+                    <p class="preco">R$ 39,90</p>
+                    <p>9h20 de narração. Ouça direto no aplicativo.</p>
+                </li>
+            </ul>
+        </section>
+
+        <section id="contato" class="bloco">
+            <h2>Contato</h2>
+            <p>Ficou alguma dúvida sobre o livro? Fale com a nossa equipe.</p>
+
+            <!-- Etapa 6: um label por campo, associado pelo par for/id. -->
+            <form class="form-contato" action="#contato">
+                <label for="nome">Nome completo</label>
+                <input type="text" id="nome" name="nome" placeholder="Lucas Lemos Barbosa" required>
+
+                <label for="email">E-mail para contato</label>
+                <input type="email" id="email" name="email" placeholder="voce@exemplo.com" required>
+
+                <fieldset class="campo-grupo">
+                    <legend>Preferência de contato</legend>
+                    <input type="radio" id="pref-email" name="preferencia" value="email" checked>
+                    <label for="pref-email">E-mail</label>
+                    <input type="radio" id="pref-telefone" name="preferencia" value="telefone">
+                    <label for="pref-telefone">Telefone</label>
+                </fieldset>
+
+                <fieldset class="campo-grupo">
+                    <legend>Novidades</legend>
+                    <input type="checkbox" id="novidades" name="novidades" value="sim">
+                    <label for="novidades">Aceito receber novidades por e-mail</label>
+                </fieldset>
+
+                <label for="senha">Crie uma senha para acompanhar seu pedido</label>
+                <input type="password" id="senha" name="senha" minlength="6" placeholder="mínimo de 6 caracteres">
+
+                <button type="submit" class="btn btn-enviar">Enviar</button>
+            </form>
+        </section>
+
+    </main>
+
+    <footer id="rodape" class="barra">
+        <p>Livraria Página Viva. Loja on-line de livros novos e usados.</p>
+        <p>Contato: <a href="mailto:contato@paginaviva.com.br">contato@paginaviva.com.br</a></p>
+    </footer>
+
+    <!-- Etapa 5/7: script no fim do body, com caminho relativo. -->
+    <script src="js/script.js"></script>
+
+    <!--
+    =========================================================================
+    JUSTIFICATIVA DOS ELEMENTOS SEMÂNTICOS (Etapa 1)
+    Aluno: Lucas Lemos Barbosa | Professor: Everton
+    =========================================================================
+
+    <header>
+    Marca o topo de apresentação da página, com a identidade da livraria, a
+    navegação e o resumo do carrinho. Uma <div> agruparia os mesmos elementos
+    na tela, mas não diria a navegador nenhum, nem a leitor de tela, que aquele
+    bloco é o cabeçalho do documento.
+
+    <nav>
+    Guarda o conjunto principal de links de navegação. A tag existe para que o
+    leitor de tela ofereça o atalho "ir para a navegação". Dentro de uma <div>
+    esses links seriam texto comum no meio da página.
+
+    <main>
+    Delimita o conteúdo próprio desta página, o livro em cartaz, e deixa de fora
+    o que se repete em toda tela, como cabeçalho e rodapé. Só pode existir um
+    <main> por documento, o que dá ao leitor de tela um ponto de entrada direto
+    para o conteúdo. Uma <div id="conteudo"> não garante isso.
+
+    <article>
+    O bloco do livro se sustenta sozinho: recortado e publicado em outro lugar,
+    continuaria fazendo sentido com capa, título, autor, preço e descrição. Essa
+    independência é o critério que define o <article>.
+
+    <section>
+    Agrupa trechos com tema e título próprios: catálogo, destaques, formatos e
+    contato. A <div> serviria só para pendurar CSS, enquanto a <section> entra na
+    estrutura de títulos do documento. A <section class="card-dados">, dentro do
+    <article>, junta os dados textuais do livro para separá-los da capa no layout
+    flex, e assim evita um contêiner sem significado.
+
+    <footer>
+    Fecha o documento com o nome da livraria e o e-mail de contato. É o fecho do
+    <header> e diz "informação final sobre o conteúdo", coisa que uma
+    <div class="rodape"> só sugeriria pelo nome da classe.
+    =========================================================================
+    -->
+
+</body>
+
+</html>
