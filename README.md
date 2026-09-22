@@ -39,61 +39,65 @@ o modo de dispositivo móvel do DevTools para conferir o corte em 600px.
 
 ### 1. O papel de um servidor Web ao carregar esta página
 
-O servidor fica escutando requisições HTTP e devolve o recurso que o navegador pediu.
-Quando alguém abre o endereço da página, o navegador manda um `GET /index.html` e
-recebe de volta um código de status e o conteúdo do HTML.
+O servidor atende pedido e devolve arquivo. É basicamente isso.
 
-Só depois de ler esse HTML é que o navegador descobre que ainda precisa do
-`css/estilo.css`, do `js/script.js` e da `imagens/capa-livro.png`, e dispara uma
-requisição nova para cada um. O servidor repete o mesmo trabalho: acha o arquivo e
-devolve com o tipo de conteúdo certo.
+Quando alguém abre o endereço, o navegador manda um `GET /index.html`. O servidor acha
+o arquivo, responde com um código de status e manda o HTML junto. Aí o navegador lê esse
+HTML e descobre que falta coisa: o `css/estilo.css`, o `js/script.js` e a
+`imagens/capa-livro.png`. Cada um vira uma requisição nova, e o servidor faz o mesmo
+trabalho de novo, mais três vezes.
 
-Ele não monta a página nem roda o JavaScript desta atividade. Quem junta as peças,
-aplica o CSS e executa o script é o navegador, na máquina de quem acessou.
+O que ele não faz é montar a página. Não aplica o CSS, não roda o meu JavaScript, não
+sabe que existe um carrinho. Isso tudo acontece na máquina de quem abriu o site.
+
+Dá pra provar com esta atividade mesmo: ela funciona inteira abrindo o `index.html`
+direto do disco, sem servidor nenhum no meio. O servidor só importa quando a página
+precisa chegar em outra máquina.
 
 ### 2. Caminho relativo a partir de `paginas/sobre.html`
-
-Dentro de `paginas/sobre.html` a imagem ficaria assim:
 
 ```html
 <img src="../imagens/capa-livro.png" alt="Capa do livro O Jardim das Palavras Perdidas">
 ```
 
-Caminho relativo parte sempre da pasta do arquivo que escreveu o caminho, e não da raiz
-do projeto. Como o `sobre.html` está dentro de `paginas/`, se eu escrevesse
-`imagens/capa-livro.png` o navegador iria procurar em `paginas/imagens/capa-livro.png`,
-que não existe.
+Caminho relativo não parte da raiz do projeto. Parte da pasta onde está o arquivo que
+escreveu o caminho. Como o `sobre.html` moraria em `paginas/`, se eu escrevesse só
+`imagens/capa-livro.png` o navegador iria caçar em `paginas/imagens/capa-livro.png` e
+tomar 404.
 
-O `../` manda subir um nível na árvore de diretórios. Saindo de `paginas/` eu chego na
-raiz do projeto, e daí `imagens/capa-livro.png` acha o arquivo certo.
+O `../` é o "sobe um nível". De `paginas/` eu volto para a raiz, e de lá o
+`imagens/capa-livro.png` existe. Se a página estivesse duas pastas para dentro, seriam
+dois: `../../imagens/capa-livro.png`.
 
 ### 3. Boas práticas de HTML que apliquei
 
-Tags aninhadas e fechadas na ordem certa. Quando o aninhamento cruza, cada navegador
-remonta a árvore do seu jeito, e aí o layout quebra em um e no outro não.
+Comecei pelo óbvio, que é também o que mais quebra página: tag aberta dentro de um pai
+tem que fechar dentro dele. Quando o aninhamento cruza, cada navegador remonta a árvore
+do jeito dele e o layout quebra num e no outro não.
 
-Nenhum `id` repetido. São 18 ids na página, todos únicos. Isso não é detalhe de estilo:
-o `getElementById` devolve só a primeira ocorrência, então um id duplicado faria o
-carrinho mexer no elemento errado, e o `for` do `<label>` apontaria para o campo errado.
+Nenhum `id` repetido, são 18 na página. Isso aqui não é capricho de padrão. O
+`getElementById` devolve só o primeiro que encontrar, então id duplicado faria o carrinho
+mexer no elemento errado, e o `for` de um `<label>` apontaria para o campo errado.
 
-Indentação de quatro espaços por nível, acompanhando a hierarquia. É o jeito mais rápido
-de ver onde cada bloco começa e termina.
+Indentação de quatro espaços por nível. Num arquivo de 230 linhas é o que me deixa ver
+onde cada bloco começa e termina sem ficar contando tag na mão.
 
-Tag semântica sempre que existe uma. Usei `header`, `nav`, `main`, `article`, `section`
-e `footer` no lugar de `div`, com a justificativa de cada escolha em comentário no fim
-do `index.html`. A página não tem nenhuma `div`.
+Tag semântica sempre que existe uma, e a página acabou sem nenhuma `div`. O lugar onde
+quase usei uma foi o contêiner que segura os dados do livro ao lado da capa, que é puro
+layout. Resolvi com `<section>` e expliquei o porquê no comentário do fim do arquivo.
 
-`alt` descritivo na capa, dizendo o que a imagem mostra em vez de repetir o título do
-livro.
+O `alt` da capa descreve a imagem em vez de repetir o título do livro. Se o arquivo não
+carregar, ou se a pessoa estiver de leitor de tela, o texto ainda diz o que era para
+estar ali.
 
-Títulos em ordem: um `h1` para a marca, `h2` nas seções e `h3` nos blocos internos, sem
-pular nível.
+Títulos em ordem, um `h1` só, `h2` nas seções, `h3` dentro delas, sem pular nível. E
+`label` ligado por `for`/`id` nos seis campos do formulário, o que de quebra faz clicar
+no rótulo já focar o campo.
 
-`label` ligado ao campo por `for`/`id` nos seis campos do formulário. Além da
-acessibilidade, clicar no texto do rótulo já foca o campo.
-
-`ul` nos destaques, porque a ordem dos itens não muda o sentido, e `table` no
-comparativo de formatos, porque ali existe relação de linha e coluna de verdade.
+Por último, `ul` nos destaques e `table` nos formatos. Embaralhar os destaques não muda
+nada, então é lista. A tabela cruza formato com preço e prazo, que é relação de linha e
+coluna de verdade. Dava para deixar as duas coisas com a mesma aparência no CSS, mas o
+sentido da marcação seria outro.
 
 ## Onde está cada etapa
 
